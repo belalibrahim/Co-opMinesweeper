@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  coopminesweeper:
+    build:
+      context: CoopMinesweeper
+      dockerfile: Dockerfile
+    container_name: "coopminesweeper"
+    ports:
+      - 9988:8080
+    depends_on:
+      - db
+    networks:
+      - coopminesweeper
+
+  db:
+    image: postgres:latest
+    container_name: "coopminesweeper_postgres"
+    environment:
+      POSTGRES_DB: coop_minesweeper
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    networks:
+      - coopminesweeper
+
+networks:
+  coopminesweeper:
+    driver: bridge
+    name: coopminesweeper

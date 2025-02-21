@@ -31,7 +31,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<IGameService, GameService>();
 builder.Services.AddHostedService<TimedHostedService>();
 
-builder.WebHost.UseUrls("http://localhost:5010");
+// builder.WebHost.UseUrls("http://localhost:5010");
 
 var app = builder.Build();
 app.UseCors("AllowCoopMinesweeper");
